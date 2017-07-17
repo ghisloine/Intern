@@ -1,5 +1,13 @@
 <%@ page import="Sub.Data" %>
-<%@ page import="java.io.PrintWriter" %><%--
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.DriverManager" %>
+<%@ page import="javax.swing.plaf.nimbus.State" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.util.Calendar" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: burak
   Date: 11.07.2017
@@ -7,15 +15,33 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
   <head>
-    <title>$Title$</title>
+    <title>Main Page</title>
   </head>
-  <body>
-  <%
-    Data data = new Data();
-    PrintWriter pw = response.getWriter();
-    pw.println(data.UserList());
-  %>
+<body>
+
+
+  <<form action="/Exception.jsp" method="post"></form>>
+    <table width="500" border="1">
+
+      <form action="/Project_Oscar_war_exploded/Exception.jsp" method="post" id="index" name = "index">
+        Start Date:<br>
+        <input type="date" name="StartDate" value="StartDate"><br>
+        End Date:<br>
+        <input type="date" name="EndDate" value="EndDate"><br><br>
+        <input type="submit" value="Submit" name="gonder">
+      </form>
+      <%
+        String startDate = request.getParameter("StartDate");
+        Data data = new Data();
+        PrintWriter pw = response.getWriter();
+        data.baglanti();
+        pw.println(startDate);
+      %>
+    </table>
+    </form>
+
   </body>
 </html>
