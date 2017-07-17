@@ -1,5 +1,6 @@
 package Sub;
 
+import com.sun.org.apache.regexp.internal.RE;
 import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.sql.*;
@@ -68,6 +69,7 @@ public class Data {
     public ArrayList<String> LookingForYatch(String GoDATE,String TurnDATE){
         Statement statement = null;
         Statement statementQuest = null;
+        Statement statementYatchName;
         System.out.println("Yatch Search");
         System.out.println("When Do You Want To Go???");
         //Scanner sc = new Scanner(System.in);
@@ -91,38 +93,32 @@ public class Data {
         try{
             statement = connection.createStatement();
             statementQuest = connection.createStatement();
+            statementYatchName = connection.createStatement();
             //Rezerve Edilen Gidiş Tarihini Çevirir
             ResultSet resultSet = statement.executeQuery("SELECT *, TO_DAYS(StartDate) FROM  Reservation");
-            //Bakılacak Olan Günü Çevirir
-
-            //Bakılacak Olan Dönüş Gününü Çevirir
-            //Rezerve Edilmiş Dönüş Gününü Çevirir
-
             while (resultSet.next()){
-                a = resultSet.getString("Yatch_Name");
                 b = resultSet.getInt("TO_DAYS(StartDate)" );
-                YatchName.add(a);
                 StartDate.add(b);
             }
-            System.out.println("-------------");
+            ResultSet resultSet1 = statementYatchName.executeQuery("SELECT * FROM Yatch_Info");
+            while (resultSet1.next()){
+                a = resultSet1.getString("Name");
+                YatchName.add(a);
+            }
             ResultSet resultSet2 = statement.executeQuery("SELECT TO_DAYS('"+GoDATE +"')");
             while (resultSet2.next()){
                 d = resultSet2.getInt("TO_DAYS('"+  GoDATE +"')" );
             };
-            System.out.println("+++++++++++++++++");
             ResultSet resultSet3 = statement.executeQuery("SELECT TO_DAYS('" + TurnDATE + "')");
             while (resultSet3.next()){
                 e = resultSet3.getInt("TO_DAYS('" +  TurnDATE + "')" );
             };
-            System.out.println("====================");
             ResultSet resultSet4= statement.executeQuery("SELECT *, TO_DAYS(EndDate) FROM  Reservation");
             while (resultSet4.next()){
                 c = resultSet4.getInt("TO_DAYS(EndDate)" );
                 EndDate.add(c);
             };
-            System.out.println("-------------------");
             //Burda Hata Var
-            System.out.println("+++++++++++++++++++++");
             /*for (int q = 0;q<StartDate.size();q++){
                 if (d < StartDate.get(q)){
                     if (StartDate.get(q) == e || e < StartDate.get(q)){
@@ -152,11 +148,18 @@ public class Data {
                     Temp.add(YatchName.get(r));
                 }
             }
+            //Comparing 2 ArrayList
+
+
+
+
+
 
         }catch (Exception f){
             System.out.println(f);
         }
-        return Temp;
+        YatchName.removeAll(Temp);
+        return YatchName;
 
 
 
