@@ -1,8 +1,13 @@
 package Sub;
+import javax.print.DocFlavor;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLOutput;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -13,11 +18,9 @@ public class Yatch extends Data{
     public Connection baglanti() {
         return super.baglanti();
     }
-
-    public ArrayList Yatches(String Yatch_Name){
+    public HashMap<String, ArrayList<String>> Yatches(ArrayList<String> Yatch_Info){
+        HashMap<String,ArrayList<String>> map = new HashMap<String,ArrayList<String>>();
         Statement statement = null;
-        ArrayList<String> Yatch_Info = new ArrayList<String>();
-        System.out.println("Here Your Yatches");
         String Name = null;
         String Length = null;
         String Price = null;
@@ -25,36 +28,36 @@ public class Yatch extends Data{
         String WC = null;
         String Brand = null;
         if (baglanti() == null){
-            System.out.println("Trying For Connect");
+            //System.out.println("Trying For Connect");
             baglanti();
         }
         try{
             statement = baglanti().createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM Yatch_Info WHERE Name ='"+ Yatch_Name+"'");
-            while (resultSet.next()){
-              Name = resultSet.getString("Name");
-              Length = resultSet.getString("Length");
-                Price = resultSet.getString("Price");
-                Capacity = resultSet.getString("Capacity");
-                WC = resultSet.getString("WC");
-                Brand = resultSet.getString("Brand");
+            for (String s : Yatch_Info) {
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM Yatch_Info WHERE Name ='" + s + "'");
+                while (resultSet.next()) {
+                    Name = resultSet.getString("Name");
+                    Length = resultSet.getString("Length");
+                    Price = resultSet.getString("Price");
+                    Capacity = resultSet.getString("Capacity");
+                    WC = resultSet.getString("WC");
+                    Brand = resultSet.getString("Brand");
+                    ArrayList<String>Yatch_Bilgi = new ArrayList<String>();
+                    Yatch_Bilgi.add(Length +"\t"+Price+"\t"+Capacity+"\t"+WC+"\t"+Brand);
+                    map.put(Name,Yatch_Bilgi);
+                    }
             }
-            Yatch_Info.add(Name);
-            Yatch_Info.add(Length);
-            Yatch_Info.add(Price);
-            Yatch_Info.add(Capacity);
-            Yatch_Info.add(WC);
-            Yatch_Info.add(Brand);
 
         }catch (Exception e){
             System.out.println(e);
         }
-
-        for (int i = 0;i<Yatch_Info.size();i++){
-            System.out.println(Yatch_Info.get(i));
+        for (Map.Entry<String,ArrayList<String>> entry : map.entrySet()){
+            String key = entry.getKey();
+            List<String>values = entry.getValue();
+            System.out.println("Key = " + key);
+            System.out.println("Values ="+ values);
         }
-
-        return Yatch_Info;
+        return map;
 
 
 

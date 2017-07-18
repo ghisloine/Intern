@@ -25,20 +25,11 @@
     Data data = new Data();
     Yatch yatch = new Yatch();
     data.baglanti();
-    HashSet<String> hashSet = new HashSet<String>();
-    //ArrayList<String>arrayList = new ArrayList<String>();
-
+    yatch.Yatches(data.LookingForYatch(StartDate,EndDate));
 %>
 <%
     PrintWriter pw = response.getWriter();
-    hashSet = data.LookingForYatch(StartDate,EndDate);
-    Iterator iterator = hashSet.iterator();
-    String string = request.getParameter("StartDate");
-    for (int i = 0;i<hashSet.size();i++){
-       // pw.println(yatch.Yatches(iterator.next().toString()));
-        pw.println("<form><h1><input type=radio name="+ i +" value=male >"+yatch.Yatches(iterator.next().toString())+"</h1><br></form>");
-    }
-
 %>
+
 </body>
 </html>

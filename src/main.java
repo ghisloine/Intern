@@ -4,6 +4,7 @@
 
 
 import Sub.Data;
+import Sub.Yatch;
 
 import java.sql.SQLException;
 
@@ -14,7 +15,8 @@ public class main {
    public static void main(String [] args) throws SQLException {
 
        Data data = new Data();
-       System.out.println(data.LookingForYatch("2017-01-05","2017-01-08"));
-    }
+       Yatch yatch = new Yatch();
+       yatch.Yatches((data.LookingForYatch("2017-01-05","2017-01-08")));
+   }
 
 }

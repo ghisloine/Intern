@@ -1,12 +1,8 @@
 package Sub;
 
-import com.sun.org.apache.regexp.internal.RE;
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 import java.sql.*;
 
 import java.util.*;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by burak on 11.07.2017.
@@ -66,15 +62,16 @@ public class Data {
 
 
     }
-    public ArrayList<String> LookingForYatch(String GoDATE,String TurnDATE){
+    public ArrayList<String> LookingForYatch(String GoDATE, String TurnDATE){
+
         Statement statement = null;
-        Statement statementQuest = null;
+        //Statement statementQuest = null;
         Statement statementYatchName;
-        System.out.println("Yatch Search");
-        System.out.println("When Do You Want To Go???");
+       // System.out.println("Yatch Search");
+     //   System.out.println("When Do You Want To Go???");
         //Scanner sc = new Scanner(System.in);
         //GoDATE = "2017-01-01";
-        System.out.println("When Do You Want To Back");
+      //  System.out.println("When Do You Want To Back");
         //TurnDATE = "2017-01-05";
         int b = 0,c = 0,d = 0,e = 0;
         String a;
@@ -83,7 +80,6 @@ public class Data {
         ArrayList<Integer> EndDate = new ArrayList<Integer>();
         ArrayList<String> YatchName = new ArrayList<String>();
         ArrayList<String> Temp = new ArrayList<String>();
-        HashSet<String> Conteiner = new HashSet<>();
 
 
         if (connection == null){
@@ -92,7 +88,7 @@ public class Data {
         }
         try{
             statement = connection.createStatement();
-            statementQuest = connection.createStatement();
+            //statementQuest = connection.createStatement();
             statementYatchName = connection.createStatement();
             //Rezerve Edilen Gidiş Tarihini Çevirir
             ResultSet resultSet = statement.executeQuery("SELECT *, TO_DAYS(StartDate) FROM  Reservation");
@@ -118,22 +114,6 @@ public class Data {
                 c = resultSet4.getInt("TO_DAYS(EndDate)" );
                 EndDate.add(c);
             };
-            //Burda Hata Var
-            /*for (int q = 0;q<StartDate.size();q++){
-                if (d < StartDate.get(q)){
-                    if (StartDate.get(q) == e || e < StartDate.get(q)){
-                        Temp.add("Başarılı  " + YatchName.get(q) + " Teknesi Müsaittir");
-                        Conteiner.add(YatchName.get(q));
-                        System.out.println("Başarılı  " + YatchName.get(q) + " Teknesi Müsaittir");
-                    }else {
-                        System.out.println("Diğer Duruma Geçiyorum");
-                    }
-                }if (EndDate.get(q) == d || d>EndDate.get(q)){
-                    Temp.add("Başarılı  " + YatchName.get(q) + " Teknesi Müsaittir");
-                    Conteiner.add(YatchName.get(q));
-                    System.out.println("Başarılı      " + YatchName.get(q) + " Teknesi Sizin İçin Müsaittir");
-                }
-            }*/
             for(int r = 0;r<StartDate.size();r++){
                 if (d<=StartDate.get(r) && (EndDate.get(r)<=e && e>=StartDate.get(r))){
                     Temp.add(YatchName.get(r));
@@ -149,16 +129,11 @@ public class Data {
                 }
             }
             //Comparing 2 ArrayList
-
-
-
-
-
-
         }catch (Exception f){
             System.out.println(f);
         }
         YatchName.removeAll(Temp);
+        System.out.println(YatchName.toString());
         return YatchName;
 
 
