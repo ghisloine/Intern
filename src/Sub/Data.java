@@ -20,62 +20,12 @@ public class Data {
         }
         return connection;
     }
-    private ArrayList<String> UserList(){
-        ArrayList<String> liste = new ArrayList<String>();
-        String a;
-        if (connection == null){
-            System.out.println("Not Connected Database,Connecting...");
-            baglanti();
-        }
-        try {
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM User");
-            while (resultSet.next()){
-                a =  resultSet.getString("name")+ " " +resultSet.getString("özellik") + "  " + resultSet.getString("time");
-                liste.add(a);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return liste;
-
-    }
-    public void UpdatingServer() throws SQLException {
-
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO  User Values('Aysel','Muzeyyen','1968-02-13')");
-            System.out.println("Ekleme Başarılı");
-            this.UserList();
-        }catch (SQLException e){
-            System.out.println(e);
-            System.out.println("EKLEME BAŞARISIZ !");
-        }
-        finally {
-            if (statement != null){
-                statement.close();
-
-            }
-        }
-
-
-    }
     public ArrayList<String> LookingForYatch(String GoDATE, String TurnDATE){
 
         Statement statement = null;
-        //Statement statementQuest = null;
         Statement statementYatchName;
-       // System.out.println("Yatch Search");
-     //   System.out.println("When Do You Want To Go???");
-        //Scanner sc = new Scanner(System.in);
-        //GoDATE = "2017-01-01";
-      //  System.out.println("When Do You Want To Back");
-        //TurnDATE = "2017-01-05";
         int b = 0,c = 0,d = 0,e = 0;
         String a;
-       // String Quest = "TO_DAYS(' +  i + "')";
         ArrayList<Integer> StartDate = new ArrayList<Integer>();
         ArrayList<Integer> EndDate = new ArrayList<Integer>();
         ArrayList<String> YatchName = new ArrayList<String>();

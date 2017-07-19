@@ -23,7 +23,7 @@
 <body>
 
 
-  <<form action="/Exception.jsp" method="post"></form>>
+  <form action="/Exception.jsp" method="post"></form>>
     <table width="500" border="1">
 
       <form action="/Project_Oscar_war_exploded/Exception.jsp" method="post" id="index" name = "index">

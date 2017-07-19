@@ -1,22 +1,14 @@
-//import Sub.Data;
 
-//import java.sql.SQLException;
-
-
-import Sub.Data;
-import Sub.Yatch;
-
-import java.sql.SQLException;
-
-/**
- * Created by burak on 11.07.2017.
- */
 public class main {
-   public static void main(String [] args) throws SQLException {
+    /*public static void main(String[] args) throws SQLException {
 
        Data data = new Data();
        Yatch yatch = new Yatch();
        yatch.Yatches((data.LookingForYatch("2017-01-05","2017-01-08")));
-   }
+       Update update = new Update();
+       update.InsertingDb("Opal","2017-09-08","2017-09-17","Kotor","","2971+256334");
 
-}
+   }
+*/
+    }
+

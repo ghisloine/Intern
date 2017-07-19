@@ -1,13 +1,12 @@
 package Sub;
-import javax.print.DocFlavor;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLOutput;
+
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
 
 
 /**
@@ -50,12 +49,6 @@ public class Yatch extends Data{
 
         }catch (Exception e){
             System.out.println(e);
-        }
-        for (Map.Entry<String,ArrayList<String>> entry : map.entrySet()){
-            String key = entry.getKey();
-            List<String>values = entry.getValue();
-            System.out.println("Key = " + key);
-            System.out.println("Values ="+ values);
         }
         return map;
 
