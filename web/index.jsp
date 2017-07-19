@@ -20,12 +20,12 @@
   <head>
     <title>Main Page</title>
   </head>
-<body>
-
-
-  <form action="/Exception.jsp" method="post"></form>>
+<body><h3>Hoşgeldiniz <%=session.getAttribute("UserName")
+%></h3>
+------------------------------------
+<h2>Rezervasyon İçin Tarih Seçin</h2>
+  <form action="/Exception.jsp" method="post"></form>
     <table width="500" border="1">
-
       <form action="/Project_Oscar_war_exploded/Exception.jsp" method="post" id="index" name = "index">
         Start Date:<br>
         <input type="date" name="StartDate" value="StartDate"><br>
@@ -42,6 +42,16 @@
       %>
     </table>
     </form>
-
-  </body>
+<br>
+<br>
+<form action="Login.jsp" method="post">
+  <legend>Login Olmak İçin Tıklayın</legend><br>
+  <br>
+  <input type="submit" name="sendLoginPage" value="Login">
+</form>
+<form action="LogOut.jsp" method="post">
+<legend>Çıkış için</legend><br>
+<input type="submit" name="logout">
+</form>
+</body>
 </html>

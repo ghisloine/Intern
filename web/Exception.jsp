@@ -33,7 +33,8 @@
         String key = entry.getKey();
         List<String>values = entry.getValue();
       %>
-    <%=values%>
+    <h2><%out.print(key);%></h2>
+    <h3><%=values%></h3>
     <input type=checkbox name=anahtar value=<%=key%>>Choose ME!!<br>
     <%
     }
@@ -43,7 +44,7 @@
 
 
 
-<input type="submit" value="Sender" name="SubmitYatches">
+<input type="submit" value="Sender" name="SubmitYatches"><br>
 </form>
 </body>
 </html>
